@@ -18,5 +18,22 @@ export default defineConfig({
     // Redirect TanStack Start's bundled server entry to src/server.ts (our SSR error wrapper).
     // nitro/vite builds from this
     server: { entry: "server" },
+    // Pre-render every page to plain HTML so `npm run build` emits a static site.
+    prerender: { enabled: true, crawlLinks: true },
+    pages: [
+      { path: "/" },
+      { path: "/about" },
+      { path: "/services" },
+      { path: "/blog" },
+      { path: "/contact" },
+      { path: "/blog/signs-your-business-network-needs-an-upgrade" },
+      { path: "/blog/cybersecurity-basics-every-small-business-should-have" },
+      { path: "/blog/is-it-time-to-rebrand" },
+      { path: "/blog/cloud-vs-on-premise" },
+      { path: "/blog/what-makes-a-website-convert" },
+      { path: "/blog/real-cost-of-a-data-breach" },
+      { path: "/blog/brand-identity-that-lasts" },
+      { path: "/blog/choosing-the-right-database" },
+    ],
   },
 });
