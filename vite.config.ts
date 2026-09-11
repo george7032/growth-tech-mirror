@@ -7,6 +7,13 @@
 import { defineConfig } from "@lovable.dev/vite-tanstack-config";
 
 export default defineConfig({
+  // Outside Lovable (your own `npm run build`), produce a fully static site:
+  // every page is pre-rendered to plain HTML in dist/ so it can be uploaded
+  // to any static host (cPanel, Netlify, GitHub Pages, etc).
+  // Inside Lovable, the platform pins its own Cloudflare target and this is ignored.
+  nitro: {
+    preset: "static",
+  },
   tanstackStart: {
     // Redirect TanStack Start's bundled server entry to src/server.ts (our SSR error wrapper).
     // nitro/vite builds from this
