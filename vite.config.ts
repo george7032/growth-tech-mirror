@@ -12,50 +12,15 @@ export default defineConfig({
   // to any static host (cPanel, Netlify, GitHub Pages, etc).
   // Inside Lovable, the platform pins its own Cloudflare target and this is ignored.
   nitro: {
+    // Outside Lovable, build a plain Node server + static assets so
+    // scripts/build-static.mjs can render every page to static HTML in dist/.
+    // Inside Lovable the platform pins its own Cloudflare target and ignores this.
     preset: "node-server",
-    // Pre-render all pages to static HTML during the build (applied only
-    // outside Lovable, where the platform pins its own Cloudflare target).
-    prerender: {
-      crawlLinks: true,
-      routes: [
-        "/",
-        "/about",
-        "/services",
-        "/blog",
-        "/contact",
-        "/blog/signs-your-business-network-needs-an-upgrade",
-        "/blog/cybersecurity-basics-every-small-business-should-have",
-        "/blog/is-it-time-to-rebrand",
-        "/blog/cloud-vs-on-premise",
-        "/blog/what-makes-a-website-convert",
-        "/blog/real-cost-of-a-data-breach",
-        "/blog/brand-identity-that-lasts",
-        "/blog/choosing-the-right-database",
-      ],
-    },
-    // Static-friendly output: public files (HTML + assets) land in dist/
     output: { dir: "dist", publicDir: "dist", serverDir: "dist-server" },
   } as never,
   tanstackStart: {
     // Redirect TanStack Start's bundled server entry to src/server.ts (our SSR error wrapper).
     // nitro/vite builds from this
     server: { entry: "server" },
-    // Pre-render every page to plain HTML so `npm run build` emits a static site.
-    prerender: { enabled: true, crawlLinks: true },
-    pages: [
-      { path: "/" },
-      { path: "/about" },
-      { path: "/services" },
-      { path: "/blog" },
-      { path: "/contact" },
-      { path: "/blog/signs-your-business-network-needs-an-upgrade" },
-      { path: "/blog/cybersecurity-basics-every-small-business-should-have" },
-      { path: "/blog/is-it-time-to-rebrand" },
-      { path: "/blog/cloud-vs-on-premise" },
-      { path: "/blog/what-makes-a-website-convert" },
-      { path: "/blog/real-cost-of-a-data-breach" },
-      { path: "/blog/brand-identity-that-lasts" },
-      { path: "/blog/choosing-the-right-database" },
-    ],
   },
 });
